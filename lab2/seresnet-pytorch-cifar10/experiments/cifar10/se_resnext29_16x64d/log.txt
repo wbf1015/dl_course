@@ -1,0 +1,1261 @@
+[2023-04-19 15:53:16,664] - [train.py line:171] : {'architecture': 'se_resnext29_16x64d', 'data_path': '.././data', 'ckpt_path': './', 'ckpt_name': 'se_resnext29_16x64d', 'num_classes': 10, 'dataset': 'cifar10', 'use_gpu': True, 'input_size': 32, 'epochs': 30, 'batch_size': 128, 'test_batch': 200, 'eval_freq': 2, 'workers': 4, 'optimize': {'momentum': 0.9, 'weight_decay': 0.0005, 'nesterov': True}, 'mixup': False, 'mixup_alpha': 0.4, 'augmentation': {'normalize': True, 'random_crop': True, 'random_horizontal_filp': True, 'cutout': False, 'holes': 1, 'length': 8}, 'lr_scheduler': {'type': 'STEP', 'base_lr': 0.1, 'lr_epochs': [150, 225], 'lr_mults': 0.1, 'min_lr': 0.0, 'lower_bound': -6.0, 'upper_bound': 3.0}}
+[2023-04-19 15:53:17,561] - [train.py line:175] : SeResNeXt(
+  (conv_1_3x3): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn_1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (stage_1): Sequential(
+    (stage_1_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (shortcut_bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_1_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_1_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (stage_2): Sequential(
+    (stage_2_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (shortcut_bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_2_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_2_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (stage_3): Sequential(
+    (stage_3_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (shortcut_bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_3_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(1024, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_3_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(1024, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (fc): Linear(in_features=1024, out_features=10, bias=True)
+)
+[2023-04-19 15:53:17,563] - [train.py line:176] :  == total parameters: 68677018
+[2023-04-19 15:54:37,195] - [train.py line:171] : {'architecture': 'se_resnext29_16x64d', 'data_path': '.././data', 'ckpt_path': './', 'ckpt_name': 'se_resnext29_16x64d', 'num_classes': 10, 'dataset': 'cifar10', 'use_gpu': True, 'input_size': 32, 'epochs': 30, 'batch_size': 128, 'test_batch': 200, 'eval_freq': 2, 'workers': 4, 'optimize': {'momentum': 0.9, 'weight_decay': 0.0005, 'nesterov': True}, 'mixup': False, 'mixup_alpha': 0.4, 'augmentation': {'normalize': True, 'random_crop': True, 'random_horizontal_filp': True, 'cutout': False, 'holes': 1, 'length': 8}, 'lr_scheduler': {'type': 'STEP', 'base_lr': 0.1, 'lr_epochs': [150, 225], 'lr_mults': 0.1, 'min_lr': 0.0, 'lower_bound': -6.0, 'upper_bound': 3.0}}
+[2023-04-19 15:54:38,005] - [train.py line:175] : SeResNeXt(
+  (conv_1_3x3): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn_1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (stage_1): Sequential(
+    (stage_1_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (shortcut_bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_1_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_1_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (stage_2): Sequential(
+    (stage_2_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (shortcut_bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_2_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_2_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (stage_3): Sequential(
+    (stage_3_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (shortcut_bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_3_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(1024, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_3_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(1024, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (fc): Linear(in_features=1024, out_features=10, bias=True)
+)
+[2023-04-19 15:54:38,008] - [train.py line:176] :  == total parameters: 68677018
+[2023-04-19 15:54:44,768] - [train.py line:214] :             =======  Training  =======
+
+[2023-04-19 15:54:44,770] - [train.py line: 50] :  === Epoch: [1/30] === 
+[2023-04-19 15:56:07,533] - [train.py line:171] : {'architecture': 'se_resnext29_16x64d', 'data_path': '.././data', 'ckpt_path': './', 'ckpt_name': 'se_resnext29_16x64d', 'num_classes': 10, 'dataset': 'cifar10', 'use_gpu': True, 'input_size': 32, 'epochs': 30, 'batch_size': 4, 'test_batch': 4, 'eval_freq': 2, 'workers': 4, 'optimize': {'momentum': 0.9, 'weight_decay': 0.0005, 'nesterov': True}, 'mixup': False, 'mixup_alpha': 0.4, 'augmentation': {'normalize': True, 'random_crop': True, 'random_horizontal_filp': True, 'cutout': False, 'holes': 1, 'length': 8}, 'lr_scheduler': {'type': 'STEP', 'base_lr': 0.1, 'lr_epochs': [150, 225], 'lr_mults': 0.1, 'min_lr': 0.0, 'lower_bound': -6.0, 'upper_bound': 3.0}}
+[2023-04-19 15:56:08,393] - [train.py line:175] : SeResNeXt(
+  (conv_1_3x3): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn_1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (stage_1): Sequential(
+    (stage_1_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (shortcut_bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_1_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_1_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (stage_2): Sequential(
+    (stage_2_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (shortcut_bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_2_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_2_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (stage_3): Sequential(
+    (stage_3_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (shortcut_bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_3_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(1024, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_3_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(1024, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (fc): Linear(in_features=1024, out_features=10, bias=True)
+)
+[2023-04-19 15:56:08,396] - [train.py line:176] :  == total parameters: 68677018
+[2023-04-19 15:56:15,062] - [train.py line:214] :             =======  Training  =======
+
+[2023-04-19 15:56:15,063] - [train.py line: 50] :  === Epoch: [1/30] === 
+[2023-04-19 15:56:21,767] - [train.py line: 92] :    == step: [100/12500], train loss: 4.553 | train acc: 10.250% | lr: 0.100000
+[2023-04-19 15:56:26,840] - [train.py line: 92] :    == step: [200/12500], train loss: 3.461 | train acc: 11.500% | lr: 0.100000
+[2023-04-19 15:56:31,927] - [train.py line: 92] :    == step: [300/12500], train loss: 3.073 | train acc: 13.083% | lr: 0.100000
+[2023-04-19 15:56:36,999] - [train.py line: 92] :    == step: [400/12500], train loss: 2.883 | train acc: 12.312% | lr: 0.100000
+[2023-04-19 15:56:42,076] - [train.py line: 92] :    == step: [500/12500], train loss: 2.770 | train acc: 11.750% | lr: 0.100000
+[2023-04-19 15:56:47,154] - [train.py line: 92] :    == step: [600/12500], train loss: 2.697 | train acc: 11.917% | lr: 0.100000
+[2023-04-19 15:56:52,234] - [train.py line: 92] :    == step: [700/12500], train loss: 2.643 | train acc: 12.107% | lr: 0.100000
+[2023-04-19 15:56:57,320] - [train.py line: 92] :    == step: [800/12500], train loss: 2.604 | train acc: 11.969% | lr: 0.100000
+[2023-04-19 15:57:02,397] - [train.py line: 92] :    == step: [900/12500], train loss: 2.575 | train acc: 12.083% | lr: 0.100000
+[2023-04-19 15:57:07,494] - [train.py line: 92] :    == step: [1000/12500], train loss: 2.551 | train acc: 11.900% | lr: 0.100000
+[2023-04-19 15:57:12,574] - [train.py line: 92] :    == step: [1100/12500], train loss: 2.526 | train acc: 12.136% | lr: 0.100000
+[2023-04-19 15:57:17,658] - [train.py line: 92] :    == step: [1200/12500], train loss: 2.506 | train acc: 12.271% | lr: 0.100000
+[2023-04-19 15:57:22,737] - [train.py line: 92] :    == step: [1300/12500], train loss: 2.489 | train acc: 12.500% | lr: 0.100000
+[2023-04-19 15:57:27,826] - [train.py line: 92] :    == step: [1400/12500], train loss: 2.471 | train acc: 12.571% | lr: 0.100000
+[2023-04-19 15:57:32,916] - [train.py line: 92] :    == step: [1500/12500], train loss: 2.453 | train acc: 12.867% | lr: 0.100000
+[2023-04-19 15:57:38,008] - [train.py line: 92] :    == step: [1600/12500], train loss: 2.438 | train acc: 13.125% | lr: 0.100000
+[2023-04-19 15:57:43,108] - [train.py line: 92] :    == step: [1700/12500], train loss: 2.427 | train acc: 13.426% | lr: 0.100000
+[2023-04-19 15:57:48,184] - [train.py line: 92] :    == step: [1800/12500], train loss: 2.413 | train acc: 13.667% | lr: 0.100000
+[2023-04-19 15:57:53,270] - [train.py line: 92] :    == step: [1900/12500], train loss: 2.402 | train acc: 13.684% | lr: 0.100000
+[2023-04-19 15:57:58,342] - [train.py line: 92] :    == step: [2000/12500], train loss: 2.389 | train acc: 14.050% | lr: 0.100000
+[2023-04-19 15:58:03,443] - [train.py line: 92] :    == step: [2100/12500], train loss: 2.379 | train acc: 14.321% | lr: 0.100000
+[2023-04-19 15:58:08,543] - [train.py line: 92] :    == step: [2200/12500], train loss: 2.369 | train acc: 14.557% | lr: 0.100000
+[2023-04-19 15:58:13,624] - [train.py line: 92] :    == step: [2300/12500], train loss: 2.360 | train acc: 14.837% | lr: 0.100000
+[2023-04-19 15:58:18,718] - [train.py line: 92] :    == step: [2400/12500], train loss: 2.350 | train acc: 15.042% | lr: 0.100000
+[2023-04-19 15:58:23,801] - [train.py line: 92] :    == step: [2500/12500], train loss: 2.343 | train acc: 15.200% | lr: 0.100000
+[2023-04-19 15:58:28,890] - [train.py line: 92] :    == step: [2600/12500], train loss: 2.334 | train acc: 15.394% | lr: 0.100000
+[2023-04-19 15:58:33,972] - [train.py line: 92] :    == step: [2700/12500], train loss: 2.327 | train acc: 15.639% | lr: 0.100000
+[2023-04-19 15:58:39,068] - [train.py line: 92] :    == step: [2800/12500], train loss: 2.321 | train acc: 15.848% | lr: 0.100000
+[2023-04-19 15:58:44,165] - [train.py line: 92] :    == step: [2900/12500], train loss: 2.312 | train acc: 16.069% | lr: 0.100000
+[2023-04-19 15:58:49,253] - [train.py line: 92] :    == step: [3000/12500], train loss: 2.307 | train acc: 16.242% | lr: 0.100000
+[2023-04-19 15:58:54,349] - [train.py line: 92] :    == step: [3100/12500], train loss: 2.302 | train acc: 16.371% | lr: 0.100000
+[2023-04-19 15:58:59,412] - [train.py line: 92] :    == step: [3200/12500], train loss: 2.298 | train acc: 16.461% | lr: 0.100000
+[2023-04-19 15:59:04,478] - [train.py line: 92] :    == step: [3300/12500], train loss: 2.295 | train acc: 16.485% | lr: 0.100000
+[2023-04-19 15:59:09,563] - [train.py line: 92] :    == step: [3400/12500], train loss: 2.288 | train acc: 16.618% | lr: 0.100000
+[2023-04-19 15:59:14,639] - [train.py line: 92] :    == step: [3500/12500], train loss: 2.284 | train acc: 16.671% | lr: 0.100000
+[2023-04-19 15:59:19,728] - [train.py line: 92] :    == step: [3600/12500], train loss: 2.281 | train acc: 16.826% | lr: 0.100000
+[2023-04-19 15:59:24,811] - [train.py line: 92] :    == step: [3700/12500], train loss: 2.276 | train acc: 17.034% | lr: 0.100000
+[2023-04-19 15:59:29,915] - [train.py line: 92] :    == step: [3800/12500], train loss: 2.271 | train acc: 17.191% | lr: 0.100000
+[2023-04-19 15:59:35,008] - [train.py line: 92] :    == step: [3900/12500], train loss: 2.267 | train acc: 17.314% | lr: 0.100000
+[2023-04-19 15:59:40,089] - [train.py line: 92] :    == step: [4000/12500], train loss: 2.262 | train acc: 17.500% | lr: 0.100000
+[2023-04-19 15:59:45,191] - [train.py line: 92] :    == step: [4100/12500], train loss: 2.259 | train acc: 17.573% | lr: 0.100000
+[2023-04-19 15:59:50,268] - [train.py line: 92] :    == step: [4200/12500], train loss: 2.255 | train acc: 17.667% | lr: 0.100000
+[2023-04-19 15:59:55,354] - [train.py line: 92] :    == step: [4300/12500], train loss: 2.254 | train acc: 17.616% | lr: 0.100000
+[2023-04-19 16:00:00,441] - [train.py line: 92] :    == step: [4400/12500], train loss: 2.252 | train acc: 17.653% | lr: 0.100000
+[2023-04-19 16:00:05,518] - [train.py line: 92] :    == step: [4500/12500], train loss: 2.248 | train acc: 17.822% | lr: 0.100000
+[2023-04-19 16:00:10,604] - [train.py line: 92] :    == step: [4600/12500], train loss: 2.244 | train acc: 17.935% | lr: 0.100000
+[2023-04-19 16:00:15,714] - [train.py line: 92] :    == step: [4700/12500], train loss: 2.241 | train acc: 18.032% | lr: 0.100000
+[2023-04-19 16:00:20,801] - [train.py line: 92] :    == step: [4800/12500], train loss: 2.238 | train acc: 18.125% | lr: 0.100000
+[2023-04-19 16:00:25,874] - [train.py line: 92] :    == step: [4900/12500], train loss: 2.236 | train acc: 18.224% | lr: 0.100000
+[2023-04-19 16:00:30,954] - [train.py line: 92] :    == step: [5000/12500], train loss: 2.234 | train acc: 18.290% | lr: 0.100000
+[2023-04-19 16:00:36,032] - [train.py line: 92] :    == step: [5100/12500], train loss: 2.231 | train acc: 18.309% | lr: 0.100000
+[2023-04-19 16:00:41,109] - [train.py line: 92] :    == step: [5200/12500], train loss: 2.229 | train acc: 18.317% | lr: 0.100000
+[2023-04-19 16:00:46,189] - [train.py line: 92] :    == step: [5300/12500], train loss: 2.226 | train acc: 18.387% | lr: 0.100000
+[2023-04-19 16:00:51,273] - [train.py line: 92] :    == step: [5400/12500], train loss: 2.223 | train acc: 18.468% | lr: 0.100000
+[2023-04-19 16:00:56,366] - [train.py line: 92] :    == step: [5500/12500], train loss: 2.221 | train acc: 18.482% | lr: 0.100000
+[2023-04-19 16:01:01,454] - [train.py line: 92] :    == step: [5600/12500], train loss: 2.219 | train acc: 18.464% | lr: 0.100000
+[2023-04-19 16:01:06,541] - [train.py line: 92] :    == step: [5700/12500], train loss: 2.217 | train acc: 18.513% | lr: 0.100000
+[2023-04-19 16:01:11,615] - [train.py line: 92] :    == step: [5800/12500], train loss: 2.214 | train acc: 18.539% | lr: 0.100000
+[2023-04-19 16:01:16,718] - [train.py line: 92] :    == step: [5900/12500], train loss: 2.212 | train acc: 18.593% | lr: 0.100000
+[2023-04-19 16:01:21,807] - [train.py line: 92] :    == step: [6000/12500], train loss: 2.210 | train acc: 18.663% | lr: 0.100000
+[2023-04-19 16:01:26,905] - [train.py line: 92] :    == step: [6100/12500], train loss: 2.208 | train acc: 18.721% | lr: 0.100000
+[2023-04-19 16:01:31,993] - [train.py line: 92] :    == step: [6200/12500], train loss: 2.206 | train acc: 18.730% | lr: 0.100000
+[2023-04-19 16:01:37,068] - [train.py line: 92] :    == step: [6300/12500], train loss: 2.204 | train acc: 18.774% | lr: 0.100000
+[2023-04-19 16:01:42,160] - [train.py line: 92] :    == step: [6400/12500], train loss: 2.203 | train acc: 18.797% | lr: 0.100000
+[2023-04-19 16:01:47,281] - [train.py line: 92] :    == step: [6500/12500], train loss: 2.201 | train acc: 18.842% | lr: 0.100000
+[2023-04-19 16:01:52,367] - [train.py line: 92] :    == step: [6600/12500], train loss: 2.200 | train acc: 18.936% | lr: 0.100000
+[2023-04-19 16:01:57,488] - [train.py line: 92] :    == step: [6700/12500], train loss: 2.198 | train acc: 18.944% | lr: 0.100000
+[2023-04-19 16:02:02,575] - [train.py line: 92] :    == step: [6800/12500], train loss: 2.196 | train acc: 19.004% | lr: 0.100000
+[2023-04-19 16:02:07,656] - [train.py line: 92] :    == step: [6900/12500], train loss: 2.196 | train acc: 19.007% | lr: 0.100000
+[2023-04-19 16:02:12,740] - [train.py line: 92] :    == step: [7000/12500], train loss: 2.193 | train acc: 19.129% | lr: 0.100000
+[2023-04-19 16:02:17,817] - [train.py line: 92] :    == step: [7100/12500], train loss: 2.192 | train acc: 19.173% | lr: 0.100000
+[2023-04-19 16:02:22,898] - [train.py line: 92] :    == step: [7200/12500], train loss: 2.190 | train acc: 19.274% | lr: 0.100000
+[2023-04-19 16:02:27,954] - [train.py line: 92] :    == step: [7300/12500], train loss: 2.189 | train acc: 19.305% | lr: 0.100000
+[2023-04-19 16:02:33,031] - [train.py line: 92] :    == step: [7400/12500], train loss: 2.187 | train acc: 19.304% | lr: 0.100000
+[2023-04-19 16:02:38,113] - [train.py line: 92] :    == step: [7500/12500], train loss: 2.186 | train acc: 19.367% | lr: 0.100000
+[2023-04-19 16:02:43,187] - [train.py line: 92] :    == step: [7600/12500], train loss: 2.185 | train acc: 19.388% | lr: 0.100000
+[2023-04-19 16:02:48,267] - [train.py line: 92] :    == step: [7700/12500], train loss: 2.184 | train acc: 19.403% | lr: 0.100000
+[2023-04-19 16:02:53,341] - [train.py line: 92] :    == step: [7800/12500], train loss: 2.183 | train acc: 19.436% | lr: 0.100000
+[2023-04-19 16:02:58,427] - [train.py line: 92] :    == step: [7900/12500], train loss: 2.182 | train acc: 19.440% | lr: 0.100000
+[2023-04-19 16:03:03,506] - [train.py line: 92] :    == step: [8000/12500], train loss: 2.182 | train acc: 19.441% | lr: 0.100000
+[2023-04-19 16:03:08,598] - [train.py line: 92] :    == step: [8100/12500], train loss: 2.180 | train acc: 19.460% | lr: 0.100000
+[2023-04-19 16:03:13,697] - [train.py line: 92] :    == step: [8200/12500], train loss: 2.179 | train acc: 19.494% | lr: 0.100000
+[2023-04-19 16:03:18,772] - [train.py line: 92] :    == step: [8300/12500], train loss: 2.179 | train acc: 19.476% | lr: 0.100000
+[2023-04-19 16:03:23,861] - [train.py line: 92] :    == step: [8400/12500], train loss: 2.178 | train acc: 19.530% | lr: 0.100000
+[2023-04-19 16:03:28,940] - [train.py line: 92] :    == step: [8500/12500], train loss: 2.178 | train acc: 19.565% | lr: 0.100000
+[2023-04-19 16:03:34,018] - [train.py line: 92] :    == step: [8600/12500], train loss: 2.177 | train acc: 19.561% | lr: 0.100000
+[2023-04-19 16:03:39,096] - [train.py line: 92] :    == step: [8700/12500], train loss: 2.176 | train acc: 19.578% | lr: 0.100000
+[2023-04-19 16:03:44,182] - [train.py line: 92] :    == step: [8800/12500], train loss: 2.175 | train acc: 19.611% | lr: 0.100000
+[2023-04-19 16:03:49,268] - [train.py line: 92] :    == step: [8900/12500], train loss: 2.173 | train acc: 19.632% | lr: 0.100000
+[2023-04-19 16:03:54,366] - [train.py line: 92] :    == step: [9000/12500], train loss: 2.173 | train acc: 19.658% | lr: 0.100000
+[2023-04-19 16:03:59,455] - [train.py line: 92] :    == step: [9100/12500], train loss: 2.172 | train acc: 19.657% | lr: 0.100000
+[2023-04-19 16:04:04,529] - [train.py line: 92] :    == step: [9200/12500], train loss: 2.171 | train acc: 19.688% | lr: 0.100000
+[2023-04-19 16:04:09,623] - [train.py line: 92] :    == step: [9300/12500], train loss: 2.171 | train acc: 19.704% | lr: 0.100000
+[2023-04-19 16:04:14,700] - [train.py line: 92] :    == step: [9400/12500], train loss: 2.169 | train acc: 19.731% | lr: 0.100000
+[2023-04-19 16:04:19,795] - [train.py line: 92] :    == step: [9500/12500], train loss: 2.168 | train acc: 19.755% | lr: 0.100000
+[2023-04-19 16:04:24,888] - [train.py line: 92] :    == step: [9600/12500], train loss: 2.167 | train acc: 19.781% | lr: 0.100000
+[2023-04-19 16:04:29,971] - [train.py line: 92] :    == step: [9700/12500], train loss: 2.167 | train acc: 19.802% | lr: 0.100000
+[2023-04-19 16:04:35,082] - [train.py line: 92] :    == step: [9800/12500], train loss: 2.165 | train acc: 19.834% | lr: 0.100000
+[2023-04-19 16:04:40,166] - [train.py line: 92] :    == step: [9900/12500], train loss: 2.164 | train acc: 19.889% | lr: 0.100000
+[2023-04-19 16:04:45,254] - [train.py line: 92] :    == step: [10000/12500], train loss: 2.164 | train acc: 19.887% | lr: 0.100000
+[2023-04-19 16:04:50,341] - [train.py line: 92] :    == step: [10100/12500], train loss: 2.163 | train acc: 19.901% | lr: 0.100000
+[2023-04-19 16:04:55,416] - [train.py line: 92] :    == step: [10200/12500], train loss: 2.163 | train acc: 19.914% | lr: 0.100000
+[2023-04-19 16:05:00,503] - [train.py line: 92] :    == step: [10300/12500], train loss: 2.161 | train acc: 19.961% | lr: 0.100000
+[2023-04-19 16:05:05,600] - [train.py line: 92] :    == step: [10400/12500], train loss: 2.160 | train acc: 19.954% | lr: 0.100000
+[2023-04-19 16:05:10,685] - [train.py line: 92] :    == step: [10500/12500], train loss: 2.159 | train acc: 19.995% | lr: 0.100000
+[2023-04-19 16:05:15,776] - [train.py line: 92] :    == step: [10600/12500], train loss: 2.158 | train acc: 20.031% | lr: 0.100000
+[2023-04-19 16:05:20,844] - [train.py line: 92] :    == step: [10700/12500], train loss: 2.158 | train acc: 20.021% | lr: 0.100000
+[2023-04-19 16:05:25,923] - [train.py line: 92] :    == step: [10800/12500], train loss: 2.156 | train acc: 20.074% | lr: 0.100000
+[2023-04-19 16:05:31,000] - [train.py line: 92] :    == step: [10900/12500], train loss: 2.156 | train acc: 20.087% | lr: 0.100000
+[2023-04-19 16:05:36,088] - [train.py line: 92] :    == step: [11000/12500], train loss: 2.155 | train acc: 20.073% | lr: 0.100000
+[2023-04-19 16:05:41,153] - [train.py line: 92] :    == step: [11100/12500], train loss: 2.155 | train acc: 20.072% | lr: 0.100000
+[2023-04-19 16:05:46,230] - [train.py line: 92] :    == step: [11200/12500], train loss: 2.154 | train acc: 20.085% | lr: 0.100000
+[2023-04-19 16:05:51,314] - [train.py line: 92] :    == step: [11300/12500], train loss: 2.154 | train acc: 20.075% | lr: 0.100000
+[2023-04-19 16:05:56,361] - [train.py line: 92] :    == step: [11400/12500], train loss: 2.154 | train acc: 20.129% | lr: 0.100000
+[2023-04-19 16:06:01,427] - [train.py line: 92] :    == step: [11500/12500], train loss: 2.153 | train acc: 20.157% | lr: 0.100000
+[2023-04-19 16:06:06,490] - [train.py line: 92] :    == step: [11600/12500], train loss: 2.153 | train acc: 20.172% | lr: 0.100000
+[2023-04-19 16:06:11,577] - [train.py line: 92] :    == step: [11700/12500], train loss: 2.152 | train acc: 20.216% | lr: 0.100000
+[2023-04-19 16:06:16,651] - [train.py line: 92] :    == step: [11800/12500], train loss: 2.150 | train acc: 20.269% | lr: 0.100000
+[2023-04-19 16:06:21,719] - [train.py line: 92] :    == step: [11900/12500], train loss: 2.149 | train acc: 20.275% | lr: 0.100000
+[2023-04-19 16:06:26,824] - [train.py line: 92] :    == step: [12000/12500], train loss: 2.149 | train acc: 20.267% | lr: 0.100000
+[2023-04-19 16:06:31,891] - [train.py line: 92] :    == step: [12100/12500], train loss: 2.148 | train acc: 20.260% | lr: 0.100000
+[2023-04-19 16:06:36,973] - [train.py line: 92] :    == step: [12200/12500], train loss: 2.147 | train acc: 20.295% | lr: 0.100000
+[2023-04-19 16:06:42,044] - [train.py line: 92] :    == step: [12300/12500], train loss: 2.147 | train acc: 20.303% | lr: 0.100000
+[2023-04-19 16:06:47,108] - [train.py line: 92] :    == step: [12400/12500], train loss: 2.146 | train acc: 20.347% | lr: 0.100000
+[2023-04-19 16:06:52,179] - [train.py line: 92] :    == step: [12500/12500], train loss: 2.145 | train acc: 20.358% | lr: 0.100000
+[2023-04-19 16:06:52,313] - [train.py line:102] :    == step: [12500/12500], train loss: 2.145 | train acc: 20.358% | lr: 0.100000
+[2023-04-19 16:06:52,313] - [train.py line:107] :    == cost time: 637.2505s
+[2023-04-19 16:06:52,317] - [train.py line:126] :  === Validate ===
+[2023-04-19 16:07:36,799] - [train.py line:141] :    == test loss: 2.005 | test acc: 26.580%
+[2023-04-19 16:07:38,163] - [train.py line: 50] :  === Epoch: [2/30] === 
+[2023-04-19 16:07:43,780] - [train.py line: 92] :    == step: [100/12500], train loss: 2.165 | train acc: 21.250% | lr: 0.100000
+[2023-04-19 16:07:48,894] - [train.py line: 92] :    == step: [200/12500], train loss: 2.119 | train acc: 21.500% | lr: 0.100000
+[2023-04-19 16:07:53,978] - [train.py line: 92] :    == step: [300/12500], train loss: 2.092 | train acc: 21.917% | lr: 0.100000
+[2023-04-19 16:07:59,054] - [train.py line: 92] :    == step: [400/12500], train loss: 2.089 | train acc: 21.875% | lr: 0.100000
+[2023-04-19 16:08:04,118] - [train.py line: 92] :    == step: [500/12500], train loss: 2.083 | train acc: 22.000% | lr: 0.100000
+[2023-04-19 16:08:09,195] - [train.py line: 92] :    == step: [600/12500], train loss: 2.080 | train acc: 22.083% | lr: 0.100000
+[2023-04-19 16:08:14,282] - [train.py line: 92] :    == step: [700/12500], train loss: 2.087 | train acc: 21.679% | lr: 0.100000
+[2023-04-19 16:08:19,338] - [train.py line: 92] :    == step: [800/12500], train loss: 2.090 | train acc: 21.156% | lr: 0.100000
+[2023-04-19 16:08:24,408] - [train.py line: 92] :    == step: [900/12500], train loss: 2.080 | train acc: 21.167% | lr: 0.100000
+[2023-04-19 16:08:29,466] - [train.py line: 92] :    == step: [1000/12500], train loss: 2.075 | train acc: 21.600% | lr: 0.100000
+[2023-04-19 16:08:34,532] - [train.py line: 92] :    == step: [1100/12500], train loss: 2.070 | train acc: 21.682% | lr: 0.100000
+[2023-04-19 16:08:39,581] - [train.py line: 92] :    == step: [1200/12500], train loss: 2.073 | train acc: 21.542% | lr: 0.100000
+[2023-04-19 16:08:44,642] - [train.py line: 92] :    == step: [1300/12500], train loss: 2.069 | train acc: 21.635% | lr: 0.100000
+[2023-04-19 16:08:49,712] - [train.py line: 92] :    == step: [1400/12500], train loss: 2.069 | train acc: 21.589% | lr: 0.100000
+[2023-04-19 16:08:54,791] - [train.py line: 92] :    == step: [1500/12500], train loss: 2.069 | train acc: 21.700% | lr: 0.100000
+[2023-04-19 16:08:59,867] - [train.py line: 92] :    == step: [1600/12500], train loss: 2.068 | train acc: 21.719% | lr: 0.100000
+[2023-04-19 16:09:04,942] - [train.py line: 92] :    == step: [1700/12500], train loss: 2.067 | train acc: 21.735% | lr: 0.100000
+[2023-04-19 16:09:10,005] - [train.py line: 92] :    == step: [1800/12500], train loss: 2.067 | train acc: 21.653% | lr: 0.100000
+[2023-04-19 16:09:15,067] - [train.py line: 92] :    == step: [1900/12500], train loss: 2.067 | train acc: 21.566% | lr: 0.100000
+[2023-04-19 16:09:20,122] - [train.py line: 92] :    == step: [2000/12500], train loss: 2.068 | train acc: 21.512% | lr: 0.100000
+[2023-04-19 16:09:25,188] - [train.py line: 92] :    == step: [2100/12500], train loss: 2.068 | train acc: 21.583% | lr: 0.100000
+[2023-04-19 16:09:30,244] - [train.py line: 92] :    == step: [2200/12500], train loss: 2.070 | train acc: 21.557% | lr: 0.100000
+[2023-04-19 16:09:35,306] - [train.py line: 92] :    == step: [2300/12500], train loss: 2.068 | train acc: 21.652% | lr: 0.100000
+[2023-04-19 16:09:40,372] - [train.py line: 92] :    == step: [2400/12500], train loss: 2.071 | train acc: 21.583% | lr: 0.100000
+[2023-04-19 16:09:45,422] - [train.py line: 92] :    == step: [2500/12500], train loss: 2.068 | train acc: 21.650% | lr: 0.100000
+[2023-04-25 02:13:56,724] - [train.py line:171] : {'architecture': 'se_resnext29_16x64d', 'data_path': '.././data', 'ckpt_path': './', 'ckpt_name': 'se_resnext29_16x64d', 'num_classes': 10, 'dataset': 'cifar10', 'use_gpu': True, 'input_size': 32, 'epochs': 30, 'batch_size': 4, 'test_batch': 4, 'eval_freq': 2, 'workers': 4, 'optimize': {'momentum': 0.9, 'weight_decay': 0.0005, 'nesterov': True}, 'mixup': False, 'mixup_alpha': 0.4, 'augmentation': {'normalize': True, 'random_crop': True, 'random_horizontal_filp': True, 'cutout': False, 'holes': 1, 'length': 8}, 'lr_scheduler': {'type': 'STEP', 'base_lr': 0.1, 'lr_epochs': [150, 225], 'lr_mults': 0.1, 'min_lr': 0.0, 'lower_bound': -6.0, 'upper_bound': 3.0}}
+[2023-04-25 02:13:57,536] - [train.py line:175] : SeResNeXt(
+  (conv_1_3x3): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn_1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (stage_1): Sequential(
+    (stage_1_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (shortcut_bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_1_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_1_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (stage_2): Sequential(
+    (stage_2_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (shortcut_bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_2_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_2_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (stage_3): Sequential(
+    (stage_3_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (shortcut_bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_3_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(1024, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_3_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(1024, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (fc): Linear(in_features=1024, out_features=10, bias=True)
+)
+[2023-04-25 02:13:57,539] - [train.py line:176] :  == total parameters: 68677018
+[2023-04-25 02:14:03,254] - [train.py line:214] :             =======  Training  =======
+
+[2023-04-25 02:14:03,255] - [train.py line: 50] :  === Epoch: [1/30] === 
+[2023-04-25 02:14:09,299] - [train.py line: 92] :    == step: [100/12500], train loss: 4.860 | train acc: 10.500% | lr: 0.100000
+[2023-04-25 02:14:13,389] - [train.py line: 92] :    == step: [200/12500], train loss: 3.606 | train acc: 10.375% | lr: 0.100000
+[2023-04-25 02:14:17,484] - [train.py line: 92] :    == step: [300/12500], train loss: 3.177 | train acc: 11.417% | lr: 0.100000
+[2023-04-25 02:14:21,568] - [train.py line: 92] :    == step: [400/12500], train loss: 2.972 | train acc: 11.188% | lr: 0.100000
+[2023-04-25 02:14:25,661] - [train.py line: 92] :    == step: [500/12500], train loss: 2.850 | train acc: 10.200% | lr: 0.100000
+[2023-04-25 02:14:29,768] - [train.py line: 92] :    == step: [600/12500], train loss: 2.763 | train acc: 10.667% | lr: 0.100000
+[2023-04-25 02:14:33,883] - [train.py line: 92] :    == step: [700/12500], train loss: 2.702 | train acc: 11.071% | lr: 0.100000
+[2023-04-25 02:17:49,005] - [train.py line:191] : {'architecture': 'se_resnext29_16x64d', 'data_path': '.././data', 'ckpt_path': './', 'ckpt_name': 'se_resnext29_16x64d', 'num_classes': 10, 'dataset': 'cifar10', 'use_gpu': True, 'input_size': 32, 'epochs': 30, 'batch_size': 128, 'test_batch': 128, 'eval_freq': 2, 'workers': 4, 'optimize': {'momentum': 0.9, 'weight_decay': 0.0005, 'nesterov': True}, 'mixup': False, 'mixup_alpha': 0.4, 'augmentation': {'normalize': True, 'random_crop': True, 'random_horizontal_filp': True, 'cutout': False, 'holes': 1, 'length': 8}, 'lr_scheduler': {'type': 'STEP', 'base_lr': 0.1, 'lr_epochs': [150, 225], 'lr_mults': 0.1, 'min_lr': 0.0, 'lower_bound': -6.0, 'upper_bound': 3.0}}
+[2023-04-25 02:17:49,868] - [train.py line:195] : SeResNeXt(
+  (conv_1_3x3): Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  (bn_1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (stage_1): Sequential(
+    (stage_1_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (shortcut_bn): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_1_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_1_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(256, 16, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(16, 256, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (stage_2): Sequential(
+    (stage_2_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(256, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (shortcut_bn): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_2_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_2_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(512, 32, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(32, 512, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(2048, 2048, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (stage_3): Sequential(
+    (stage_3_bottleneck_0): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(512, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential(
+        (shortcut_conv): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (shortcut_bn): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (stage_3_bottleneck_1): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(1024, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+    (stage_3_bottleneck_2): Bottleneck(
+      (relu): ReLU(inplace=True)
+      (se_module): SEModule(
+        (avg_pool): AdaptiveAvgPool2d(output_size=1)
+        (fc_1): Conv2d(1024, 64, kernel_size=(1, 1), stride=(1, 1))
+        (relu): ReLU(inplace=True)
+        (fc_2): Conv2d(64, 1024, kernel_size=(1, 1), stride=(1, 1))
+        (sigmoid): Sigmoid()
+      )
+      (conv_reduce): Conv2d(1024, 4096, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_reduce): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_conv): Conv2d(4096, 4096, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), groups=16, bias=False)
+      (bn): BatchNorm2d(4096, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (conv_expand): Conv2d(4096, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (bn_expand): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (shortcut): Sequential()
+    )
+  )
+  (fc): Linear(in_features=1024, out_features=10, bias=True)
+)
+[2023-04-25 02:17:49,870] - [train.py line:196] :  == total parameters: 68677018
+[2023-04-25 02:17:55,575] - [train.py line:234] :             =======  Training  =======
+
+[2023-04-25 02:17:55,576] - [train.py line: 50] :  === Epoch: [1/30] === 
+[2023-04-25 02:18:54,425] - [train.py line: 92] :    == step: [100/391], train loss: 2.994 | train acc: 16.805% | lr: 0.100000
+[2023-04-25 02:19:49,009] - [train.py line: 92] :    == step: [200/391], train loss: 2.432 | train acc: 22.914% | lr: 0.100000
+[2023-04-25 02:20:43,735] - [train.py line: 92] :    == step: [300/391], train loss: 2.186 | train acc: 27.185% | lr: 0.100000
+[2023-04-25 02:21:37,008] - [train.py line:102] :    == step: [391/391], train loss: 2.042 | train acc: 30.518% | lr: 0.100000
+[2023-04-25 02:21:37,009] - [train.py line:107] :    == cost time: 221.4336s
+[2023-04-25 02:21:37,011] - [train.py line:126] :  === Validate ===
+[2023-04-25 02:21:50,249] - [train.py line:141] :    == test loss: 1.521 | test acc: 43.940%
+[2023-04-25 02:21:53,469] - [train.py line: 50] :  === Epoch: [2/30] === 
+[2023-04-25 02:22:48,743] - [train.py line: 92] :    == step: [100/391], train loss: 1.430 | train acc: 47.211% | lr: 0.100000
+[2023-04-25 02:23:43,496] - [train.py line: 92] :    == step: [200/391], train loss: 1.380 | train acc: 49.344% | lr: 0.100000
+[2023-04-25 02:24:38,251] - [train.py line: 92] :    == step: [300/391], train loss: 1.317 | train acc: 51.734% | lr: 0.100000
+[2023-04-25 02:25:27,962] - [train.py line:102] :    == step: [391/391], train loss: 1.264 | train acc: 53.918% | lr: 0.100000
+[2023-04-25 02:25:27,962] - [train.py line:107] :    == cost time: 214.4939s
+[2023-04-25 02:25:27,963] - [train.py line:126] :  === Validate ===
+[2023-04-25 02:25:40,735] - [train.py line:141] :    == test loss: 1.085 | test acc: 60.400%
+[2023-04-25 02:25:43,894] - [train.py line: 50] :  === Epoch: [3/30] === 
+[2023-04-25 02:26:39,149] - [train.py line: 92] :    == step: [100/391], train loss: 1.016 | train acc: 63.766% | lr: 0.100000
+[2023-04-25 02:27:33,941] - [train.py line: 92] :    == step: [200/391], train loss: 0.982 | train acc: 65.047% | lr: 0.100000
+[2023-04-25 02:28:28,740] - [train.py line: 92] :    == step: [300/391], train loss: 0.952 | train acc: 66.169% | lr: 0.100000
+[2023-04-25 02:29:18,491] - [train.py line:102] :    == step: [391/391], train loss: 0.927 | train acc: 67.050% | lr: 0.100000
+[2023-04-25 02:29:18,491] - [train.py line:107] :    == cost time: 214.5980s
+[2023-04-25 02:29:18,492] - [train.py line: 50] :  === Epoch: [4/30] === 
+[2023-04-25 02:30:13,781] - [train.py line: 92] :    == step: [100/391], train loss: 0.770 | train acc: 72.461% | lr: 0.100000
+[2023-04-25 02:31:08,590] - [train.py line: 92] :    == step: [200/391], train loss: 0.767 | train acc: 72.633% | lr: 0.100000
+[2023-04-25 02:32:03,383] - [train.py line: 92] :    == step: [300/391], train loss: 0.743 | train acc: 73.594% | lr: 0.100000
+[2023-04-25 02:32:53,102] - [train.py line:102] :    == step: [391/391], train loss: 0.729 | train acc: 74.106% | lr: 0.100000
+[2023-04-25 02:32:53,103] - [train.py line:107] :    == cost time: 214.6111s
+[2023-04-25 02:32:53,106] - [train.py line:126] :  === Validate ===
+[2023-04-25 02:33:05,845] - [train.py line:141] :    == test loss: 0.728 | test acc: 74.850%
+[2023-04-25 02:33:09,004] - [train.py line: 50] :  === Epoch: [5/30] === 
+[2023-04-25 02:34:04,245] - [train.py line: 92] :    == step: [100/391], train loss: 0.636 | train acc: 77.625% | lr: 0.100000
+[2023-04-25 02:34:59,009] - [train.py line: 92] :    == step: [200/391], train loss: 0.625 | train acc: 78.223% | lr: 0.100000
+[2023-04-25 02:35:53,762] - [train.py line: 92] :    == step: [300/391], train loss: 0.610 | train acc: 78.706% | lr: 0.100000
+[2023-04-25 02:36:43,473] - [train.py line:102] :    == step: [391/391], train loss: 0.602 | train acc: 79.126% | lr: 0.100000
+[2023-04-25 02:36:43,473] - [train.py line:107] :    == cost time: 214.4698s
+[2023-04-25 02:36:43,476] - [train.py line: 50] :  === Epoch: [6/30] === 
+[2023-04-25 02:37:38,714] - [train.py line: 92] :    == step: [100/391], train loss: 0.545 | train acc: 81.148% | lr: 0.100000
+[2023-04-25 02:38:33,513] - [train.py line: 92] :    == step: [200/391], train loss: 0.539 | train acc: 81.340% | lr: 0.100000
+[2023-04-25 02:39:28,307] - [train.py line: 92] :    == step: [300/391], train loss: 0.531 | train acc: 81.536% | lr: 0.100000
+[2023-04-25 02:40:18,084] - [train.py line:102] :    == step: [391/391], train loss: 0.529 | train acc: 81.630% | lr: 0.100000
+[2023-04-25 02:40:18,084] - [train.py line:107] :    == cost time: 214.6096s
+[2023-04-25 02:40:18,085] - [train.py line:126] :  === Validate ===
+[2023-04-25 02:40:30,827] - [train.py line:141] :    == test loss: 0.617 | test acc: 79.370%
+[2023-04-25 02:40:34,002] - [train.py line: 50] :  === Epoch: [7/30] === 
+[2023-04-25 02:41:29,213] - [train.py line: 92] :    == step: [100/391], train loss: 0.469 | train acc: 83.820% | lr: 0.100000
+[2023-04-25 02:42:23,980] - [train.py line: 92] :    == step: [200/391], train loss: 0.477 | train acc: 83.582% | lr: 0.100000
+[2023-04-25 02:43:18,732] - [train.py line: 92] :    == step: [300/391], train loss: 0.479 | train acc: 83.495% | lr: 0.100000
+[2023-04-25 02:44:08,524] - [train.py line:102] :    == step: [391/391], train loss: 0.477 | train acc: 83.608% | lr: 0.100000
+[2023-04-25 02:44:08,524] - [train.py line:107] :    == cost time: 214.5234s
+[2023-04-25 02:44:08,525] - [train.py line: 50] :  === Epoch: [8/30] === 
+[2023-04-25 02:45:03,708] - [train.py line: 92] :    == step: [100/391], train loss: 0.446 | train acc: 84.977% | lr: 0.100000
+[2023-04-25 02:45:58,489] - [train.py line: 92] :    == step: [200/391], train loss: 0.446 | train acc: 84.855% | lr: 0.100000
+[2023-04-25 02:46:53,214] - [train.py line: 92] :    == step: [300/391], train loss: 0.446 | train acc: 84.768% | lr: 0.100000
+[2023-04-25 02:47:42,987] - [train.py line:102] :    == step: [391/391], train loss: 0.448 | train acc: 84.592% | lr: 0.100000
+[2023-04-25 02:47:42,988] - [train.py line:107] :    == cost time: 214.4630s
+[2023-04-25 02:47:42,989] - [train.py line:126] :  === Validate ===
+[2023-04-25 02:47:55,766] - [train.py line:141] :    == test loss: 0.657 | test acc: 78.600%
+[2023-04-25 02:47:57,544] - [train.py line: 50] :  === Epoch: [9/30] === 
+[2023-04-25 02:48:52,788] - [train.py line: 92] :    == step: [100/391], train loss: 0.422 | train acc: 85.312% | lr: 0.100000
+[2023-04-25 02:49:47,577] - [train.py line: 92] :    == step: [200/391], train loss: 0.428 | train acc: 85.254% | lr: 0.100000
+[2023-04-25 02:50:42,320] - [train.py line: 92] :    == step: [300/391], train loss: 0.426 | train acc: 85.359% | lr: 0.100000
+[2023-04-25 02:51:32,042] - [train.py line:102] :    == step: [391/391], train loss: 0.422 | train acc: 85.524% | lr: 0.100000
+[2023-04-25 02:51:32,042] - [train.py line:107] :    == cost time: 214.4991s
+[2023-04-25 02:51:32,043] - [train.py line: 50] :  === Epoch: [10/30] === 
+[2023-04-25 02:52:27,245] - [train.py line: 92] :    == step: [100/391], train loss: 0.395 | train acc: 86.484% | lr: 0.100000
+[2023-04-25 02:53:21,974] - [train.py line: 92] :    == step: [200/391], train loss: 0.399 | train acc: 86.242% | lr: 0.100000
+[2023-04-25 02:54:16,692] - [train.py line: 92] :    == step: [300/391], train loss: 0.406 | train acc: 85.930% | lr: 0.100000
+[2023-04-25 02:55:06,412] - [train.py line:102] :    == step: [391/391], train loss: 0.405 | train acc: 85.956% | lr: 0.100000
+[2023-04-25 02:55:06,412] - [train.py line:107] :    == cost time: 214.3695s
+[2023-04-25 02:55:06,415] - [train.py line:126] :  === Validate ===
+[2023-04-25 02:55:19,161] - [train.py line:141] :    == test loss: 0.549 | test acc: 81.400%
+[2023-04-25 02:55:22,330] - [train.py line: 50] :  === Epoch: [11/30] === 
+[2023-04-25 02:56:17,540] - [train.py line: 92] :    == step: [100/391], train loss: 0.373 | train acc: 87.211% | lr: 0.100000
+[2023-04-25 02:57:12,276] - [train.py line: 92] :    == step: [200/391], train loss: 0.380 | train acc: 86.980% | lr: 0.100000
+[2023-04-25 02:58:07,014] - [train.py line: 92] :    == step: [300/391], train loss: 0.386 | train acc: 86.711% | lr: 0.100000
+[2023-04-25 02:58:56,731] - [train.py line:102] :    == step: [391/391], train loss: 0.388 | train acc: 86.644% | lr: 0.100000
+[2023-04-25 02:58:56,731] - [train.py line:107] :    == cost time: 214.4019s
+[2023-04-25 02:58:56,733] - [train.py line: 50] :  === Epoch: [12/30] === 
+[2023-04-25 02:59:51,941] - [train.py line: 92] :    == step: [100/391], train loss: 0.378 | train acc: 87.164% | lr: 0.100000
+[2023-04-25 03:00:46,677] - [train.py line: 92] :    == step: [200/391], train loss: 0.382 | train acc: 86.945% | lr: 0.100000
+[2023-04-25 03:01:41,381] - [train.py line: 92] :    == step: [300/391], train loss: 0.381 | train acc: 86.997% | lr: 0.100000
+[2023-04-25 03:02:31,069] - [train.py line:102] :    == step: [391/391], train loss: 0.379 | train acc: 87.038% | lr: 0.100000
+[2023-04-25 03:02:31,070] - [train.py line:107] :    == cost time: 214.3380s
+[2023-04-25 03:02:31,071] - [train.py line:126] :  === Validate ===
+[2023-04-25 03:02:43,828] - [train.py line:141] :    == test loss: 0.632 | test acc: 78.890%
+[2023-04-25 03:02:45,642] - [train.py line: 50] :  === Epoch: [13/30] === 
+[2023-04-25 03:03:40,793] - [train.py line: 92] :    == step: [100/391], train loss: 0.354 | train acc: 87.938% | lr: 0.100000
+[2023-04-25 03:04:35,492] - [train.py line: 92] :    == step: [200/391], train loss: 0.362 | train acc: 87.695% | lr: 0.100000
+[2023-04-25 03:05:30,180] - [train.py line: 92] :    == step: [300/391], train loss: 0.361 | train acc: 87.846% | lr: 0.100000
+[2023-04-25 03:06:19,824] - [train.py line:102] :    == step: [391/391], train loss: 0.365 | train acc: 87.656% | lr: 0.100000
+[2023-04-25 03:06:19,825] - [train.py line:107] :    == cost time: 214.1831s
+[2023-04-25 03:06:19,827] - [train.py line: 50] :  === Epoch: [14/30] === 
+[2023-04-25 03:07:14,942] - [train.py line: 92] :    == step: [100/391], train loss: 0.354 | train acc: 88.008% | lr: 0.100000
+[2023-04-25 03:08:09,610] - [train.py line: 92] :    == step: [200/391], train loss: 0.358 | train acc: 87.820% | lr: 0.100000
+[2023-04-25 03:09:04,264] - [train.py line: 92] :    == step: [300/391], train loss: 0.361 | train acc: 87.703% | lr: 0.100000
+[2023-04-25 03:09:53,905] - [train.py line:102] :    == step: [391/391], train loss: 0.360 | train acc: 87.718% | lr: 0.100000
+[2023-04-25 03:09:53,905] - [train.py line:107] :    == cost time: 214.0797s
+[2023-04-25 03:09:53,907] - [train.py line:126] :  === Validate ===
+[2023-04-25 03:10:06,658] - [train.py line:141] :    == test loss: 0.534 | test acc: 81.670%
+[2023-04-25 03:10:09,861] - [train.py line: 50] :  === Epoch: [15/30] === 
+[2023-04-25 03:11:04,985] - [train.py line: 92] :    == step: [100/391], train loss: 0.350 | train acc: 88.156% | lr: 0.100000
+[2023-04-25 03:11:59,666] - [train.py line: 92] :    == step: [200/391], train loss: 0.354 | train acc: 87.930% | lr: 0.100000
+[2023-04-25 03:12:54,337] - [train.py line: 92] :    == step: [300/391], train loss: 0.356 | train acc: 87.901% | lr: 0.100000
+[2023-04-25 03:13:43,992] - [train.py line:102] :    == step: [391/391], train loss: 0.359 | train acc: 87.758% | lr: 0.100000
+[2023-04-25 03:13:43,993] - [train.py line:107] :    == cost time: 214.1324s
+[2023-04-25 03:13:43,996] - [train.py line: 50] :  === Epoch: [16/30] === 
+[2023-04-25 03:14:39,117] - [train.py line: 92] :    == step: [100/391], train loss: 0.347 | train acc: 88.281% | lr: 0.100000
+[2023-04-25 03:15:33,783] - [train.py line: 92] :    == step: [200/391], train loss: 0.347 | train acc: 88.285% | lr: 0.100000
+[2023-04-25 03:16:28,431] - [train.py line: 92] :    == step: [300/391], train loss: 0.351 | train acc: 88.109% | lr: 0.100000
+[2023-04-25 03:17:18,077] - [train.py line:102] :    == step: [391/391], train loss: 0.355 | train acc: 88.016% | lr: 0.100000
+[2023-04-25 03:17:18,078] - [train.py line:107] :    == cost time: 214.0833s
+[2023-04-25 03:17:18,080] - [train.py line:126] :  === Validate ===
+[2023-04-25 03:17:30,849] - [train.py line:141] :    == test loss: 0.443 | test acc: 85.060%
+[2023-04-25 03:17:34,035] - [train.py line: 50] :  === Epoch: [17/30] === 
+[2023-04-25 03:18:29,145] - [train.py line: 92] :    == step: [100/391], train loss: 0.326 | train acc: 88.711% | lr: 0.100000
+[2023-04-25 03:19:23,847] - [train.py line: 92] :    == step: [200/391], train loss: 0.336 | train acc: 88.430% | lr: 0.100000
+[2023-04-25 03:20:18,515] - [train.py line: 92] :    == step: [300/391], train loss: 0.345 | train acc: 88.146% | lr: 0.100000
+[2023-04-25 03:21:08,227] - [train.py line:102] :    == step: [391/391], train loss: 0.348 | train acc: 88.056% | lr: 0.100000
+[2023-04-25 03:21:08,227] - [train.py line:107] :    == cost time: 214.1926s
+[2023-04-25 03:21:08,228] - [train.py line: 50] :  === Epoch: [18/30] === 
+[2023-04-25 03:22:03,400] - [train.py line: 92] :    == step: [100/391], train loss: 0.323 | train acc: 89.031% | lr: 0.100000
+[2023-04-25 03:22:58,119] - [train.py line: 92] :    == step: [200/391], train loss: 0.327 | train acc: 88.680% | lr: 0.100000
+[2023-04-25 03:23:52,854] - [train.py line: 92] :    == step: [300/391], train loss: 0.334 | train acc: 88.349% | lr: 0.100000
+[2023-04-25 03:24:42,556] - [train.py line:102] :    == step: [391/391], train loss: 0.338 | train acc: 88.198% | lr: 0.100000
+[2023-04-25 03:24:42,557] - [train.py line:107] :    == cost time: 214.3292s
+[2023-04-25 03:24:42,558] - [train.py line:126] :  === Validate ===
+[2023-04-25 03:24:55,271] - [train.py line:141] :    == test loss: 0.538 | test acc: 82.400%
+[2023-04-25 03:24:57,164] - [train.py line: 50] :  === Epoch: [19/30] === 
+[2023-04-25 03:25:52,293] - [train.py line: 92] :    == step: [100/391], train loss: 0.332 | train acc: 88.258% | lr: 0.100000
+[2023-04-25 03:26:46,937] - [train.py line: 92] :    == step: [200/391], train loss: 0.334 | train acc: 88.211% | lr: 0.100000
+[2023-04-25 03:27:41,562] - [train.py line: 92] :    == step: [300/391], train loss: 0.337 | train acc: 88.240% | lr: 0.100000
+[2023-04-25 03:28:31,222] - [train.py line:102] :    == step: [391/391], train loss: 0.336 | train acc: 88.342% | lr: 0.100000
+[2023-04-25 03:28:31,222] - [train.py line:107] :    == cost time: 214.0592s
+[2023-04-25 03:28:31,225] - [train.py line: 50] :  === Epoch: [20/30] === 
+[2023-04-25 03:29:26,334] - [train.py line: 92] :    == step: [100/391], train loss: 0.322 | train acc: 89.109% | lr: 0.100000
+[2023-04-25 03:30:20,968] - [train.py line: 92] :    == step: [200/391], train loss: 0.323 | train acc: 89.117% | lr: 0.100000
+[2023-04-25 03:31:15,621] - [train.py line: 92] :    == step: [300/391], train loss: 0.328 | train acc: 88.812% | lr: 0.100000
+[2023-04-25 03:32:05,306] - [train.py line:102] :    == step: [391/391], train loss: 0.328 | train acc: 88.776% | lr: 0.100000
+[2023-04-25 03:32:05,306] - [train.py line:107] :    == cost time: 214.0826s
+[2023-04-25 03:32:05,309] - [train.py line:126] :  === Validate ===
+[2023-04-25 03:32:18,066] - [train.py line:141] :    == test loss: 0.517 | test acc: 83.310%
+[2023-04-25 03:32:19,926] - [train.py line: 50] :  === Epoch: [21/30] === 
+[2023-04-25 03:33:15,063] - [train.py line: 92] :    == step: [100/391], train loss: 0.308 | train acc: 89.656% | lr: 0.100000
+[2023-04-25 03:34:09,728] - [train.py line: 92] :    == step: [200/391], train loss: 0.325 | train acc: 88.965% | lr: 0.100000
+[2023-04-25 03:35:04,405] - [train.py line: 92] :    == step: [300/391], train loss: 0.321 | train acc: 89.083% | lr: 0.100000
+[2023-04-25 03:35:54,043] - [train.py line:102] :    == step: [391/391], train loss: 0.325 | train acc: 88.860% | lr: 0.100000
+[2023-04-25 03:35:54,043] - [train.py line:107] :    == cost time: 214.1182s
+[2023-04-25 03:35:54,046] - [train.py line: 50] :  === Epoch: [22/30] === 
+[2023-04-25 03:36:49,142] - [train.py line: 92] :    == step: [100/391], train loss: 0.310 | train acc: 89.406% | lr: 0.100000
+[2023-04-25 03:37:43,771] - [train.py line: 92] :    == step: [200/391], train loss: 0.315 | train acc: 89.250% | lr: 0.100000
+[2023-04-25 03:38:38,402] - [train.py line: 92] :    == step: [300/391], train loss: 0.316 | train acc: 89.221% | lr: 0.100000
+[2023-04-25 03:39:28,030] - [train.py line:102] :    == step: [391/391], train loss: 0.319 | train acc: 89.092% | lr: 0.100000
+[2023-04-25 03:39:28,031] - [train.py line:107] :    == cost time: 213.9860s
+[2023-04-25 03:39:28,032] - [train.py line:126] :  === Validate ===
+[2023-04-25 03:39:40,761] - [train.py line:141] :    == test loss: 0.523 | test acc: 82.480%
+[2023-04-25 03:39:42,647] - [train.py line: 50] :  === Epoch: [23/30] === 
+[2023-04-25 03:40:37,761] - [train.py line: 92] :    == step: [100/391], train loss: 0.297 | train acc: 89.898% | lr: 0.100000
+[2023-04-25 03:41:32,428] - [train.py line: 92] :    == step: [200/391], train loss: 0.307 | train acc: 89.535% | lr: 0.100000
+[2023-04-25 03:42:27,099] - [train.py line: 92] :    == step: [300/391], train loss: 0.312 | train acc: 89.435% | lr: 0.100000
+[2023-04-25 03:43:16,805] - [train.py line:102] :    == step: [391/391], train loss: 0.318 | train acc: 89.214% | lr: 0.100000
+[2023-04-25 03:43:16,805] - [train.py line:107] :    == cost time: 214.1587s
+[2023-04-25 03:43:16,807] - [train.py line: 50] :  === Epoch: [24/30] === 
+[2023-04-25 03:44:11,972] - [train.py line: 92] :    == step: [100/391], train loss: 0.296 | train acc: 89.773% | lr: 0.100000
+[2023-04-25 03:45:06,711] - [train.py line: 92] :    == step: [200/391], train loss: 0.307 | train acc: 89.430% | lr: 0.100000
+[2023-04-25 03:46:01,445] - [train.py line: 92] :    == step: [300/391], train loss: 0.312 | train acc: 89.240% | lr: 0.100000
+[2023-04-25 03:46:51,158] - [train.py line:102] :    == step: [391/391], train loss: 0.314 | train acc: 89.130% | lr: 0.100000
+[2023-04-25 03:46:51,158] - [train.py line:107] :    == cost time: 214.3518s
+[2023-04-25 03:46:51,159] - [train.py line:126] :  === Validate ===
+[2023-04-25 03:47:03,906] - [train.py line:141] :    == test loss: 0.392 | test acc: 86.790%
+[2023-04-25 03:47:07,157] - [train.py line: 50] :  === Epoch: [25/30] === 
+[2023-04-25 03:48:02,264] - [train.py line: 92] :    == step: [100/391], train loss: 0.297 | train acc: 90.305% | lr: 0.100000
+[2023-04-25 03:48:56,926] - [train.py line: 92] :    == step: [200/391], train loss: 0.307 | train acc: 89.648% | lr: 0.100000
+[2023-04-25 03:49:51,584] - [train.py line: 92] :    == step: [300/391], train loss: 0.309 | train acc: 89.474% | lr: 0.100000
+[2023-04-25 03:50:41,220] - [train.py line:102] :    == step: [391/391], train loss: 0.308 | train acc: 89.482% | lr: 0.100000
+[2023-04-25 03:50:41,220] - [train.py line:107] :    == cost time: 214.0631s
+[2023-04-25 03:50:41,221] - [train.py line: 50] :  === Epoch: [26/30] === 
+[2023-04-25 03:51:36,294] - [train.py line: 92] :    == step: [100/391], train loss: 0.294 | train acc: 89.883% | lr: 0.100000
+[2023-04-25 03:52:30,957] - [train.py line: 92] :    == step: [200/391], train loss: 0.297 | train acc: 89.762% | lr: 0.100000
+[2023-04-25 03:53:25,609] - [train.py line: 92] :    == step: [300/391], train loss: 0.302 | train acc: 89.531% | lr: 0.100000
+[2023-04-25 03:54:15,235] - [train.py line:102] :    == step: [391/391], train loss: 0.307 | train acc: 89.396% | lr: 0.100000
+[2023-04-25 03:54:15,235] - [train.py line:107] :    == cost time: 214.0148s
+[2023-04-25 03:54:15,238] - [train.py line:126] :  === Validate ===
+[2023-04-25 03:54:27,977] - [train.py line:141] :    == test loss: 0.614 | test acc: 79.820%
+[2023-04-25 03:54:29,839] - [train.py line: 50] :  === Epoch: [27/30] === 
+[2023-04-25 03:55:24,964] - [train.py line: 92] :    == step: [100/391], train loss: 0.287 | train acc: 90.039% | lr: 0.100000
+[2023-04-25 03:56:19,629] - [train.py line: 92] :    == step: [200/391], train loss: 0.292 | train acc: 89.906% | lr: 0.100000
+[2023-04-25 03:57:14,300] - [train.py line: 92] :    == step: [300/391], train loss: 0.298 | train acc: 89.859% | lr: 0.100000
+[2023-04-25 03:58:03,962] - [train.py line:102] :    == step: [391/391], train loss: 0.301 | train acc: 89.754% | lr: 0.100000
+[2023-04-25 03:58:03,962] - [train.py line:107] :    == cost time: 214.1239s
+[2023-04-25 03:58:03,963] - [train.py line: 50] :  === Epoch: [28/30] === 
+[2023-04-25 03:58:59,083] - [train.py line: 92] :    == step: [100/391], train loss: 0.296 | train acc: 89.883% | lr: 0.100000
+[2023-04-25 03:59:53,746] - [train.py line: 92] :    == step: [200/391], train loss: 0.296 | train acc: 89.977% | lr: 0.100000
+[2023-04-25 04:00:48,395] - [train.py line: 92] :    == step: [300/391], train loss: 0.296 | train acc: 89.914% | lr: 0.100000
+[2023-04-25 04:01:38,009] - [train.py line:102] :    == step: [391/391], train loss: 0.299 | train acc: 89.796% | lr: 0.100000
+[2023-04-25 04:01:38,009] - [train.py line:107] :    == cost time: 214.0467s
+[2023-04-25 04:01:38,011] - [train.py line:126] :  === Validate ===
+[2023-04-25 04:01:50,747] - [train.py line:141] :    == test loss: 0.431 | test acc: 85.890%
+[2023-04-25 04:01:52,741] - [train.py line: 50] :  === Epoch: [29/30] === 
+[2023-04-25 04:02:47,872] - [train.py line: 92] :    == step: [100/391], train loss: 0.285 | train acc: 90.477% | lr: 0.100000
+[2023-04-25 04:03:42,513] - [train.py line: 92] :    == step: [200/391], train loss: 0.288 | train acc: 90.211% | lr: 0.100000
+[2023-04-25 04:04:37,155] - [train.py line: 92] :    == step: [300/391], train loss: 0.295 | train acc: 89.971% | lr: 0.100000
+[2023-04-25 04:05:26,808] - [train.py line:102] :    == step: [391/391], train loss: 0.296 | train acc: 89.918% | lr: 0.100000
+[2023-04-25 04:05:26,809] - [train.py line:107] :    == cost time: 214.0686s
+[2023-04-25 04:05:26,812] - [train.py line: 50] :  === Epoch: [30/30] === 
+[2023-04-25 04:06:21,903] - [train.py line: 92] :    == step: [100/391], train loss: 0.289 | train acc: 89.961% | lr: 0.100000
+[2023-04-25 04:07:16,520] - [train.py line: 92] :    == step: [200/391], train loss: 0.290 | train acc: 90.008% | lr: 0.100000
+[2023-04-25 04:08:11,147] - [train.py line: 92] :    == step: [300/391], train loss: 0.290 | train acc: 90.151% | lr: 0.100000
+[2023-04-25 04:09:00,795] - [train.py line:102] :    == step: [391/391], train loss: 0.295 | train acc: 89.958% | lr: 0.100000
+[2023-04-25 04:09:00,795] - [train.py line:107] :    == cost time: 213.9851s
+[2023-04-25 04:09:00,798] - [train.py line:126] :  === Validate ===
+[2023-04-25 04:09:13,538] - [train.py line:141] :    == test loss: 0.459 | test acc: 84.230%
+[2023-04-25 04:09:15,536] - [train.py line:250] : ======== Training Finished.   best_test_acc: 86.790% ========
